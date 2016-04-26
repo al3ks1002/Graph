@@ -286,11 +286,11 @@ public class UndirectedGraph {
 
         ArrayList<ArrayList<Integer>> bc = myGraph.findBiconnectedComponents();
         System.out.printf("Number of biconnected components: %d\n", bc.size());
-        /*for (ArrayList<Integer> component : bc) {
+        for (ArrayList<Integer> component : bc) {
             for (Integer vertex : component)
                 System.out.format("%d ", vertex);
             System.out.printf("\n");
-        }*/
+        }
 
 
         long time4 = System.currentTimeMillis();
