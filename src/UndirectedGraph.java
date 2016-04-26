@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.concurrent.SynchronousQueue;
-import java.util.function.BooleanSupplier;
 
 public class UndirectedGraph {
-    protected int vertices;
-    protected int edges;
-    protected HashMap<Integer, ArrayList<Integer>> neighbours;
+    private int vertices;
+    private int edges;
+    private final HashMap<Integer, ArrayList<Integer>> neighbours;
 
     public UndirectedGraph() {
         vertices = 0;
@@ -73,9 +71,7 @@ public class UndirectedGraph {
         vertices--;
         ArrayList<Integer> aux = new ArrayList<>();
 
-        for (Integer neighbour : neighbours.get(vertex)) {
-            aux.add(neighbour);
-        }
+        aux.addAll(neighbours.get(vertex));
         for (Integer neighbour : aux) {
             removeEdge(neighbour, vertex);
         }
@@ -164,7 +160,7 @@ public class UndirectedGraph {
 
                     if (lowLink.get(son) >= count.get(vertex)) {
                         ArrayList<Integer> newComponent = new ArrayList<>();
-                        while (stack.peek() != son) {
+                        while (!stack.peek().equals(son)) {
                             newComponent.add(stack.pop());
                         }
                         newComponent.add(stack.pop());
@@ -291,9 +287,6 @@ public class UndirectedGraph {
                 System.out.format("%d ", vertex);
             System.out.printf("\n");
         }
-
-        System.out.printf("mlc");
-
 
         long time4 = System.currentTimeMillis();
         elapsedTime = time4 - time3;

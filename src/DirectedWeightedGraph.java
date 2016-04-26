@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class DirectedWeightedGraph<T> extends DirectedGraph {
-    private TreeMap<Edge, T> costs;
+    private final TreeMap<Edge, T> costs;
 
     public DirectedWeightedGraph() {
         super();
@@ -99,7 +99,7 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
     public static void main(final String[] args) throws FileNotFoundException {
         DirectedWeightedGraph.runTests();
 
-        Scanner scanner = new Scanner(new File("/home/alex/IdeaProjects/Graph/graph1m.txt"));
+        Scanner scanner = new Scanner(new File("graph100k.txt"));
         DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
 
         int vertices = scanner.nextInt();

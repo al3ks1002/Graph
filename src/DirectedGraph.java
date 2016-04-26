@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class DirectedGraph {
     protected int vertices;
     protected int edges;
-    protected HashMap<Integer, ArrayList<Integer>> out;
-    protected HashMap<Integer, ArrayList<Integer>> in;
+    protected final HashMap<Integer, ArrayList<Integer>> out;
+    protected final HashMap<Integer, ArrayList<Integer>> in;
 
     public DirectedGraph() {
         vertices = 0;
@@ -35,8 +35,8 @@ public class DirectedGraph {
             return;
         }
 
-        in.put(vertex, new ArrayList<Integer>());
-        out.put(vertex, new ArrayList<Integer>());
+        in.put(vertex, new ArrayList<>());
+        out.put(vertex, new ArrayList<>());
         vertices++;
     }
 
@@ -80,17 +80,13 @@ public class DirectedGraph {
         vertices--;
         ArrayList<Integer> aux = new ArrayList<>();
 
-        for (Integer neighbour : in.get(vertex)) {
-            aux.add(neighbour);
-        }
+        aux.addAll(in.get(vertex));
         for (Integer neighbour : aux) {
             removeEdge(neighbour, vertex);
         }
 
         aux.clear();
-        for (Integer neighbour : out.get(vertex)) {
-            aux.add(neighbour);
-        }
+        aux.addAll(out.get(vertex));
         for (Integer neighbour : aux) {
             removeEdge(vertex, neighbour);
         }
