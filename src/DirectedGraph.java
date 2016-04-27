@@ -135,11 +135,15 @@ public class DirectedGraph {
         return false;
     }
 
-    public Iterable<Integer> iterableIn(final int vertex) {
+    public ArrayList<Integer> iterableIn(final int vertex) {
+        if (!isVertex(vertex))
+            return new ArrayList<>();
         return in.get(vertex);
     }
 
-    public Iterable<Integer> iterableOut(final int vertex) {
+    public ArrayList<Integer> iterableOut(final int vertex) {
+        if (!isVertex(vertex))
+            return new ArrayList<>();
         return out.get(vertex);
     }
 

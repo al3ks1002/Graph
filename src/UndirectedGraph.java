@@ -247,7 +247,7 @@ public class UndirectedGraph {
 
         long time1 = System.currentTimeMillis();
 
-        Scanner scanner = new Scanner(new File("/home/alex/IdeaProjects/Graph/graph1m.txt"));
+        Scanner scanner = new Scanner(new File("graph1m.txt"));
         UndirectedGraph myGraph = new UndirectedGraph();
 
         int vertices = scanner.nextInt();
@@ -260,7 +260,7 @@ public class UndirectedGraph {
         for (int i = 0; i < edges; i++) {
             int from = scanner.nextInt();
             int to = scanner.nextInt();
-            //int cost = scanner.nextInt();
+            int cost = scanner.nextInt();
             myGraph.addEdge(from, to);
         }
 
@@ -282,11 +282,11 @@ public class UndirectedGraph {
 
         ArrayList<ArrayList<Integer>> bc = myGraph.findBiconnectedComponents();
         System.out.printf("Number of biconnected components: %d\n", bc.size());
-        for (ArrayList<Integer> component : bc) {
+        /*for (ArrayList<Integer> component : bc) {
             for (Integer vertex : component)
                 System.out.format("%d ", vertex);
             System.out.printf("\n");
-        }
+        }*/
 
         long time4 = System.currentTimeMillis();
         elapsedTime = time4 - time3;
