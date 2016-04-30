@@ -28,15 +28,17 @@ public class DijkstraMinimumDistance {
     private HashMap<Integer, Integer> distance;
     private PriorityQueue<Pair> queue;
     private HashMap<Integer, Boolean> visited;
+    private HashMap<Integer, Integer> father;
 
     public DijkstraMinimumDistance(DirectedWeightedGraph graph) {
         this.graph = graph;
     }
 
-    public int findMinimumDistance(int source, int destination) {
+    public ArrayList<Integer> findMinimumDistance(int source, int destination) {
         this.distance = new HashMap<>();
         this.queue = new PriorityQueue<>();
         this.visited = new HashMap<>();
+        this.father = new HashMap<>();
 
         distance.put(source, 0);
         queue.add(new Pair(source, 0));
@@ -50,8 +52,20 @@ public class DijkstraMinimumDistance {
             visited.put(vertex, true);
             int currentDistance = distance.get(vertex);
 
-            if (vertex == destination)
-                return currentDistance;
+            if (vertex == destination) {
+                ArrayList<Integer> answer = new ArrayList<>();
+
+                int x = destination;
+                while (x != source) {
+                    answer.add(x);
+                    x = father.get(x);
+                }
+                answer.add(source);
+                Collections.reverse(answer);
+
+                answer.add(currentDistance);
+                return answer;
+            }
 
             for (Integer neighbour : graph.iterableOut(vertex)) {
                 int cost = graph.getCost(vertex, neighbour);
@@ -59,15 +73,16 @@ public class DijkstraMinimumDistance {
                 if (!distance.containsKey(neighbour) || currentDistance + cost < distance.get(neighbour)) {
                     distance.put(neighbour, currentDistance + cost);
                     queue.add(new Pair(neighbour, distance.get(neighbour)));
+                    father.put(neighbour, vertex);
                 }
             }
         }
 
-        return Integer.MAX_VALUE;
+        return new ArrayList<>();
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("dijgraph.txt"));
+        Scanner scanner = new Scanner(new File("graph1k.txt"));
         DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
 
         int vertices = scanner.nextInt();
@@ -91,11 +106,16 @@ public class DijkstraMinimumDistance {
             System.out.printf("Enter y: ");
             int y = in.nextInt();
 
-            int distance = dijkstra.findMinimumDistance(x, y);
-            if (distance == Integer.MAX_VALUE)
+            ArrayList<Integer> answer = dijkstra.findMinimumDistance(x, y);
+            if (answer.isEmpty())
                 System.out.println("No path between x and y!\n");
-            else
-                System.out.println(distance);
+            else {
+                int n = answer.size();
+                System.out.println(answer.get(n - 1));
+                for (int i = 0; i < n - 1; i++)
+                    System.out.printf("%d ", answer.get(i));
+                System.out.println("\n");
+            }
         }
     }
 }

@@ -37,26 +37,8 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
     }
 
     public void removeEdge(final int from, final int to) {
-        if (!isEdge(from, to)) {
-            return;
-        }
-
-        edges--;
+        super.removeEdge(from, to);
         costs.remove(new Edge(from, to));
-
-        for (Integer vertex : out.get(from)) {
-            if (vertex == to) {
-                out.get(from).remove(vertex);
-                break;
-            }
-        }
-
-        for (Integer vertex : in.get(to)) {
-            if (vertex == from) {
-                in.get(to).remove(vertex);
-                break;
-            }
-        }
     }
 
     public T getCost(final int from, final int to) {
