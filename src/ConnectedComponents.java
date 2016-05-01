@@ -24,12 +24,16 @@ public class ConnectedComponents {
     private void DFS(final int vertex, UndirectedGraph component) {
         visited.put(vertex, true);
 
-        ArrayList<Integer> neighbours = graph.getNeighbours(vertex);
-        for (Integer neighbour : neighbours) {
-            component.addEdge(vertex, neighbour);
-            if (!visited.containsKey(neighbour)) {
-                DFS(neighbour, component);
+        try {
+            ArrayList<Integer> neighbours = graph.getNeighbours(vertex);
+            for (Integer neighbour : neighbours) {
+                component.addEdge(vertex, neighbour);
+                if (!visited.containsKey(neighbour)) {
+                    DFS(neighbour, component);
+                }
             }
+        } catch (GraphException e) {
+            e.printStackTrace();
         }
     }
 

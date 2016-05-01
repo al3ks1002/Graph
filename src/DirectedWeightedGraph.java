@@ -41,25 +41,24 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
         costs.remove(new Edge(from, to));
     }
 
-    public T getCost(final int from, final int to) {
+    public T getCost(final int from, final int to) throws GraphException {
         if (!isEdge(from, to)) {
-            Object ret = 0;
-            return (T) ret;
+            throw new GraphException();
         }
 
         return costs.get(new Edge(from, to));
     }
 
-    public void setCost(final int from, final int to, final T cost) {
+    public void setCost(final int from, final int to, final T cost) throws GraphException {
         if (!isEdge(from, to)) {
-            return;
+            throw new GraphException();
         }
 
         costs.put(new Edge(from, to), cost);
     }
 
     private static void runTests() {
-        DirectedWeightedGraph<Integer> myDirectedWeightedGraph = new DirectedWeightedGraph<>();
+        /*DirectedWeightedGraph<Integer> myDirectedWeightedGraph = new DirectedWeightedGraph<>();
         myDirectedWeightedGraph.addEdge(0, 1, 10);
         myDirectedWeightedGraph.addEdge(1, 2, 20);
         myDirectedWeightedGraph.addEdge(1, 3, 30);
@@ -75,7 +74,7 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
 
         myDirectedWeightedGraph.removeVertex(1);
         assert myDirectedWeightedGraph.getCost(0, 1) == 0;
-        assert myDirectedWeightedGraph.getCost(1, 2) == 0;
+        assert myDirectedWeightedGraph.getCost(1, 2) == 0;*/
     }
 
     public static void main(final String[] args) throws FileNotFoundException {
@@ -151,17 +150,32 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
             } else if (command == 7) {
                 System.out.println("Enter a vertex:");
                 int vertex = in.nextInt();
-                System.out.println(myGraph.inDegree(vertex));
+                try {
+                    System.out.println(myGraph.inDegree(vertex));
+                } catch (GraphException e) {
+                    System.out.println("The vertex doesn't exist!");
+                    e.printStackTrace();
+                }
             } else if (command == 8) {
                 System.out.println("Enter a vertex:");
                 int vertex = in.nextInt();
-                System.out.println(myGraph.outDegree(vertex));
+                try {
+                    System.out.println(myGraph.outDegree(vertex));
+                } catch (GraphException e) {
+                    System.out.println("The vertex doesn't exist!");
+                    e.printStackTrace();
+                }
             } else if (command == 9) {
                 System.out.println("Enter x: ");
                 int x = in.nextInt();
                 System.out.println("Enter y: ");
                 int y = in.nextInt();
-                System.out.println(myGraph.getCost(x, y));
+                try {
+                    System.out.println(myGraph.getCost(x, y));
+                } catch (GraphException e) {
+                    System.out.println("The edge doesn't exist!");
+                    e.printStackTrace();
+                }
             } else if (command == 10) {
                 System.out.println("Enter x: ");
                 int x = in.nextInt();
@@ -169,7 +183,12 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
                 int y = in.nextInt();
                 System.out.println("Enter cost: ");
                 int cost = in.nextInt();
-                myGraph.setCost(x, y, cost);
+                try {
+                    myGraph.setCost(x, y, cost);
+                } catch (GraphException e) {
+                    System.out.println("The edge doesn't exist!");
+                    e.printStackTrace();
+                }
             } else if (command == 11) {
                 System.out.println(myGraph.getVertices());
             } else if (command == 12) {

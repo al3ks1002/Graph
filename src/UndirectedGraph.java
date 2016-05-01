@@ -55,9 +55,9 @@ public class UndirectedGraph {
         }
     }
 
-    public int degree(final int vertex) {
+    public int degree(final int vertex) throws GraphException {
         if (!isVertex(vertex)) {
-            return 0;
+            throw new GraphException();
         }
 
         return neighbours.get(vertex).size();
@@ -119,7 +119,10 @@ public class UndirectedGraph {
         return false;
     }
 
-    public ArrayList<Integer> getNeighbours(final int vertex) {
+    public ArrayList<Integer> getNeighbours(final int vertex) throws GraphException{
+        if (!isVertex(vertex)) {
+            throw new GraphException();
+        }
         return neighbours.get(vertex);
     }
 
@@ -130,7 +133,7 @@ public class UndirectedGraph {
     }
 
     private static void runTests() {
-        UndirectedGraph myUndirectedGraph = new UndirectedGraph();
+        /*UndirectedGraph myUndirectedGraph = new UndirectedGraph();
 
         myUndirectedGraph.addVertex(0);
         myUndirectedGraph.addVertex(1);
@@ -161,7 +164,7 @@ public class UndirectedGraph {
         assert !myUndirectedGraph.isEdge(1, 2);
         assert !myUndirectedGraph.isEdge(1, 3);
         assert !myUndirectedGraph.isEdge(0, 1);
-        assert !myUndirectedGraph.isVertex(1);
+        assert !myUndirectedGraph.isVertex(1);*/
     }
 
     public static void main(final String[] args) throws FileNotFoundException {

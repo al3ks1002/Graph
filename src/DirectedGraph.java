@@ -56,17 +56,17 @@ public class DirectedGraph {
         }
     }
 
-    public int inDegree(final int vertex) {
+    public int inDegree(final int vertex) throws GraphException {
         if (!isVertex(vertex)) {
-            return 0;
+            throw new GraphException();
         }
 
         return in.get(vertex).size();
     }
 
-    public int outDegree(final int vertex) {
+    public int outDegree(final int vertex) throws GraphException {
         if (!isVertex(vertex)) {
-            return 0;
+            throw new GraphException();
         }
 
         return out.get(vertex).size();
@@ -135,20 +135,24 @@ public class DirectedGraph {
         return false;
     }
 
-    public ArrayList<Integer> iterableIn(final int vertex) {
-        if (!isVertex(vertex))
-            return new ArrayList<>();
+    public ArrayList<Integer> iterableIn(final int vertex) throws GraphException {
+        if (!isVertex(vertex)) {
+            throw new GraphException();
+        }
+
         return in.get(vertex);
     }
 
-    public ArrayList<Integer> iterableOut(final int vertex) {
-        if (!isVertex(vertex))
-            return new ArrayList<>();
+    public ArrayList<Integer> iterableOut(final int vertex) throws GraphException{
+        if (!isVertex(vertex)) {
+            throw new GraphException();
+        }
+
         return out.get(vertex);
     }
 
     private static void runTests() {
-        DirectedGraph myDirectedGraph = new DirectedGraph();
+        /*DirectedGraph myDirectedGraph = new DirectedGraph();
 
         myDirectedGraph.addVertex(0);
         myDirectedGraph.addVertex(1);
@@ -178,7 +182,7 @@ public class DirectedGraph {
         assert !myDirectedGraph.isEdge(1, 2);
         assert !myDirectedGraph.isEdge(1, 3);
         assert !myDirectedGraph.isEdge(0, 1);
-        assert !myDirectedGraph.isVertex(1);
+        assert !myDirectedGraph.isVertex(1);*/
     }
 
     public static void main(final String[] args) throws FileNotFoundException {

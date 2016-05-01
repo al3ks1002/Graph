@@ -60,15 +60,21 @@ public class DijkstraMinimumDistance {
                 return new MinimumPath(currentDistance, path);
             }
 
-            for (Integer neighbour : graph.iterableOut(vertex)) {
-                int cost = graph.getCost(vertex, neighbour);
+            try {
+                ArrayList<Integer> neighbours = graph.iterableOut(vertex);
+                for (Integer neighbour : neighbours) {
+                    int cost = graph.getCost(vertex, neighbour);
 
-                if (!distance.containsKey(neighbour) || currentDistance + cost < distance.get(neighbour)) {
-                    distance.put(neighbour, currentDistance + cost);
-                    queue.add(new Pair(neighbour, distance.get(neighbour)));
-                    father.put(neighbour, vertex);
+                    if (!distance.containsKey(neighbour) || currentDistance + cost < distance.get(neighbour)) {
+                        distance.put(neighbour, currentDistance + cost);
+                        queue.add(new Pair(neighbour, distance.get(neighbour)));
+                        father.put(neighbour, vertex);
+                    }
                 }
+            } catch (GraphException e) {
+                e.printStackTrace();
             }
+
         }
 
         return new MinimumPath();
