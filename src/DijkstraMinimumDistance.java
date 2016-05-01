@@ -4,45 +4,41 @@ import java.util.*;
 
 public class DijkstraMinimumDistance {
     private class Pair implements Comparable<Pair> {
-        private int node;
-        private int dist;
+        private int vertex;
+        private int distance;
 
-        public Pair(int node, int dist) {
-            this.node = node;
-            this.dist = dist;
+        Pair(int vertex, int distance) {
+            this.vertex = vertex;
+            this.distance = distance;
         }
 
-        public int getNode() {
-            return this.node;
+        int getVertex() {
+            return this.vertex;
         }
 
         @Override
         public int compareTo(Pair that) {
-            return this.dist - that.dist;
+            return this.distance - that.distance;
         }
     }
 
     private DirectedWeightedGraph<Integer> graph;
-    private HashMap<Integer, Integer> distance;
-    private PriorityQueue<Pair> queue;
-    private HashMap<Integer, Boolean> visited;
-    private HashMap<Integer, Integer> father;
 
-    public DijkstraMinimumDistance(DirectedWeightedGraph graph) {
+    public DijkstraMinimumDistance(DirectedWeightedGraph<Integer> graph) {
         this.graph = graph;
     }
 
     public MinimumPath findMinimumDistance(int source, int destination) {
-        this.distance = new HashMap<>();
-        this.queue = new PriorityQueue<>();
-        this.visited = new HashMap<>();
-        this.father = new HashMap<>();
+        HashMap<Integer, Integer> distance = new HashMap<>();
+        PriorityQueue<Pair> queue = new PriorityQueue<>();
+        HashMap<Integer, Boolean> visited = new HashMap<>();
+        HashMap<Integer, Integer> father = new HashMap<>();
 
         distance.put(source, 0);
         queue.add(new Pair(source, 0));
 
         while (!queue.isEmpty()) {
-            int vertex = queue.poll().getNode();
+            int vertex = queue.poll().getVertex();
 
             if (visited.containsKey(vertex))
                 continue;
@@ -80,7 +76,7 @@ public class DijkstraMinimumDistance {
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("dijgraph.txt"));
-        DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
+        DirectedWeightedGraph<Integer> myGraph = new DirectedWeightedGraph<>();
 
         int vertices = scanner.nextInt();
         int edges = scanner.nextInt();
@@ -108,10 +104,10 @@ public class DijkstraMinimumDistance {
             if (path.isEmpty())
                 System.out.println("No path between x and y!\n");
             else {
-                int n = path.size();
                 System.out.println(answer.getMinimumDistance());
-                for (int i = 0; i < n; i++)
-                    System.out.printf("%d ", path.get(i));
+                for (Integer vertex : path) {
+                    System.out.printf("%d ", vertex);
+                }
                 System.out.println("\n");
             }
         }
