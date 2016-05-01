@@ -13,12 +13,12 @@ public class DijkstraMinimumDistance {
         }
 
         int getVertex() {
-            return this.vertex;
+            return vertex;
         }
 
         @Override
         public int compareTo(Pair that) {
-            return this.distance - that.distance;
+            return distance - that.distance;
         }
     }
 

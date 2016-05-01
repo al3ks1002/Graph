@@ -5,8 +5,8 @@ public class MinimumPath {
     ArrayList<Integer> path;
 
     public MinimumPath() {
-        this.minimumDistance = 0;
-        this.path = new ArrayList<>();
+        minimumDistance = 0;
+        path = new ArrayList<>();
     }
 
     public MinimumPath(int minimumDistance, ArrayList<Integer> path) {
@@ -15,10 +15,10 @@ public class MinimumPath {
     }
 
     public ArrayList<Integer> getPath() {
-        return this.path;
+        return path;
     }
 
     public int getMinimumDistance() {
-        return this.minimumDistance;
+        return minimumDistance;
     }
 }

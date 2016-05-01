@@ -119,92 +119,14 @@ public class UndirectedGraph {
         return false;
     }
 
-    public Iterable<Integer> iterable(final int vertex) {
+    public ArrayList<Integer> getNeighbours(final int vertex) {
         return neighbours.get(vertex);
     }
 
-
-    private void connectedComponentsDFS(final int vertex, final HashMap<Integer, Boolean> visited, final
-    ArrayList<Integer> component) {
-        visited.put(vertex, true);
-        component.add(vertex);
-
-        for (Integer neighbour : neighbours.get(vertex)) {
-            if (!visited.containsKey(neighbour)) {
-                connectedComponentsDFS(neighbour, visited, component);
-            }
-        }
-    }
-
-    private void biconnectedComponentsDFS(final int vertex, final int father, final HashMap<Integer, Integer> lowLink,
-                                          final HashMap<Integer, Integer> count, final Stack<Integer> stack,
-                                          final ArrayList<ArrayList<Integer>> biconnectedComponents) {
-        count.put(vertex, count.get(father) + 1);
-        lowLink.put(vertex, count.get(father) + 1);
-
-        if (neighbours.get(vertex).size() == 0 && father == -1) {
-            ArrayList<Integer> newComponent = new ArrayList<>();
-            newComponent.add(vertex);
-            biconnectedComponents.add(newComponent);
-        }
-
-        for (Integer son : neighbours.get(vertex)) {
-            if (son != father) {
-                if (!count.containsKey(son)) {
-                    stack.push(son);
-                    biconnectedComponentsDFS(son, vertex, lowLink, count, stack, biconnectedComponents);
-
-                    if (lowLink.get(son) < lowLink.get(vertex)) {
-                        lowLink.put(vertex, lowLink.get(son));
-                    }
-
-                    if (lowLink.get(son) >= count.get(vertex)) {
-                        ArrayList<Integer> newComponent = new ArrayList<>();
-                        while (!stack.peek().equals(son)) {
-                            newComponent.add(stack.pop());
-                        }
-                        newComponent.add(stack.pop());
-                        newComponent.add(vertex);
-                        biconnectedComponents.add(newComponent);
-                    }
-                } else {
-                    if (count.get(son) < lowLink.get(vertex)) {
-                        lowLink.put(vertex, count.get(son));
-                    }
-                }
-            }
-        }
-    }
-
-    public ArrayList<ArrayList<Integer>> findConnectedComponents() {
-        HashMap<Integer, Boolean> visited = new HashMap<>();
-        ArrayList<ArrayList<Integer>> connectedComponents = new ArrayList<>();
-
-        for (Integer vertex : neighbours.keySet()) {
-            if (!visited.containsKey(vertex)) {
-                ArrayList<Integer> newComponent = new ArrayList<>();
-                connectedComponentsDFS(vertex, visited, newComponent);
-                connectedComponents.add(newComponent);
-            }
-        }
-
-        return connectedComponents;
-    }
-
-    public ArrayList<ArrayList<Integer>> findBiconnectedComponents() {
-        HashMap<Integer, Integer> lowLink = new HashMap<>();
-        HashMap<Integer, Integer> count = new HashMap<>();
-        ArrayList<ArrayList<Integer>> biconnectedComponents = new ArrayList<>();
-        count.put(-1, 0);
-
-        for (Integer vertex : neighbours.keySet()) {
-            if (!count.containsKey(vertex)) {
-                Stack<Integer> stack = new Stack<>();
-                biconnectedComponentsDFS(vertex, -1, lowLink, count, stack, biconnectedComponents);
-            }
-        }
-
-        return biconnectedComponents;
+    public ArrayList<Integer> getAllVertices() {
+        ArrayList<Integer> vertices = new ArrayList<>();
+        vertices.addAll(neighbours.keySet());
+        return vertices;
     }
 
     private static void runTests() {
@@ -268,8 +190,6 @@ public class UndirectedGraph {
         long elapsedTime = time2 - time1;
         System.out.printf("Time to read: %f\n", elapsedTime / 1000.0);
 
-        ArrayList<ArrayList<Integer>> cc = myGraph.findConnectedComponents();
-        System.out.printf("Number of connected components: %d\n", cc.size());
 /*        for (ArrayList<Integer> component : cc) {
             for (Integer vertex : component)
                 System.out.format("%d ", vertex);
@@ -280,8 +200,6 @@ public class UndirectedGraph {
         elapsedTime = time3 - time2;
         System.out.printf("Time to find connected components: %f\n", elapsedTime / 1000.0);
 
-        ArrayList<ArrayList<Integer>> bc = myGraph.findBiconnectedComponents();
-        System.out.printf("Number of biconnected components: %d\n", bc.size());
         /*for (ArrayList<Integer> component : bc) {
             for (Integer vertex : component)
                 System.out.format("%d ", vertex);

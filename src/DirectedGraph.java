@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class DirectedGraph {
-    protected int vertices;
+    private int vertices;
     protected int edges;
     protected final HashMap<Integer, ArrayList<Integer>> out;
     protected final HashMap<Integer, ArrayList<Integer>> in;

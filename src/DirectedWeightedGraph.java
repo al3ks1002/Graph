@@ -11,7 +11,7 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
         costs = new TreeMap<>();
     }
 
-    public DirectedWeightedGraph(final DirectedWeightedGraph that) {
+    public DirectedWeightedGraph(final DirectedWeightedGraph<T> that) {
         super();
         costs = that.costs;
     }
@@ -59,7 +59,7 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
     }
 
     private static void runTests() {
-        DirectedWeightedGraph<Integer> myDirectedWeightedGraph = new DirectedWeightedGraph();
+        DirectedWeightedGraph<Integer> myDirectedWeightedGraph = new DirectedWeightedGraph<>();
         myDirectedWeightedGraph.addEdge(0, 1, 10);
         myDirectedWeightedGraph.addEdge(1, 2, 20);
         myDirectedWeightedGraph.addEdge(1, 3, 30);
@@ -82,7 +82,7 @@ public class DirectedWeightedGraph<T> extends DirectedGraph {
         DirectedWeightedGraph.runTests();
 
         Scanner scanner = new Scanner(new File("graph100k.txt"));
-        DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
+        DirectedWeightedGraph<Integer> myGraph = new DirectedWeightedGraph<>();
 
         int vertices = scanner.nextInt();
         for (int i = 0; i < vertices; i++) {
