@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.function.BooleanSupplier;
-import java.util.function.IntBinaryOperator;
 
 public class DijkstraMinimumDistance {
     private class Pair implements Comparable<Pair> {
@@ -34,7 +32,7 @@ public class DijkstraMinimumDistance {
         this.graph = graph;
     }
 
-    public ArrayList<Integer> findMinimumDistance(int source, int destination) {
+    public MinimumPath findMinimumDistance(int source, int destination) {
         this.distance = new HashMap<>();
         this.queue = new PriorityQueue<>();
         this.visited = new HashMap<>();
@@ -53,18 +51,17 @@ public class DijkstraMinimumDistance {
             int currentDistance = distance.get(vertex);
 
             if (vertex == destination) {
-                ArrayList<Integer> answer = new ArrayList<>();
+                ArrayList<Integer> path = new ArrayList<>();
 
                 int x = destination;
                 while (x != source) {
-                    answer.add(x);
+                    path.add(x);
                     x = father.get(x);
                 }
-                answer.add(source);
-                Collections.reverse(answer);
+                path.add(source);
+                Collections.reverse(path);
 
-                answer.add(currentDistance);
-                return answer;
+                return new MinimumPath(currentDistance, path);
             }
 
             for (Integer neighbour : graph.iterableOut(vertex)) {
@@ -78,11 +75,11 @@ public class DijkstraMinimumDistance {
             }
         }
 
-        return new ArrayList<>();
+        return new MinimumPath();
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("graph1k.txt"));
+        Scanner scanner = new Scanner(new File("dijgraph.txt"));
         DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
 
         int vertices = scanner.nextInt();
@@ -106,14 +103,15 @@ public class DijkstraMinimumDistance {
             System.out.printf("Enter y: ");
             int y = in.nextInt();
 
-            ArrayList<Integer> answer = dijkstra.findMinimumDistance(x, y);
-            if (answer.isEmpty())
+            MinimumPath answer = dijkstra.findMinimumDistance(x, y);
+            ArrayList<Integer> path = answer.getPath();
+            if (path.isEmpty())
                 System.out.println("No path between x and y!\n");
             else {
-                int n = answer.size();
-                System.out.println(answer.get(n - 1));
-                for (int i = 0; i < n - 1; i++)
-                    System.out.printf("%d ", answer.get(i));
+                int n = path.size();
+                System.out.println(answer.getMinimumDistance());
+                for (int i = 0; i < n; i++)
+                    System.out.printf("%d ", path.get(i));
                 System.out.println("\n");
             }
         }
