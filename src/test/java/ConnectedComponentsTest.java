@@ -33,7 +33,7 @@ public class ConnectedComponentsTest {
         when(graph.getNeighbours(4)).thenReturn(new ArrayList<Integer>(Arrays.asList(1)));
         when(graph.getNeighbours(3)).thenReturn(new ArrayList<Integer>(Arrays.asList(5)));
         when(graph.getNeighbours(5)).thenReturn(new ArrayList<Integer>(Arrays.asList(3)));
-        doThrow(new GraphException()).when(graph).getNeighbours(6);
+        when(graph.getNeighbours(6)).thenReturn(new ArrayList<Integer>());
 
         cc = new ConnectedComponents(graph);
         ArrayList<UndirectedGraph> ans = cc.getConnectedComponents();
