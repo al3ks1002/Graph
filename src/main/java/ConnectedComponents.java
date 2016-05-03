@@ -33,7 +33,6 @@ public class ConnectedComponents {
                 }
             }
         } catch (GraphException e) {
-            e.printStackTrace();
         }
     }
 

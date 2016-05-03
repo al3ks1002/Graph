@@ -22,6 +22,24 @@ public class UndirectedGraph {
         neighbours = that.neighbours;
     }
 
+    public UndirectedGraph(String file) throws FileNotFoundException {
+        neighbours = new HashMap<>();
+
+        Scanner scanner = new Scanner(new File(file));
+        int n = scanner.nextInt();
+
+        for (int i = 1; i <= n; i++)
+            addVertex(i);
+
+        int m = scanner.nextInt();
+
+        for (int i = 0; i < m; i++) {
+            int from = scanner.nextInt();
+            int to = scanner.nextInt();
+            addEdge(from, to);
+        }
+    }
+
     public int getVertices() {
         return vertices;
     }
@@ -119,7 +137,7 @@ public class UndirectedGraph {
         return false;
     }
 
-    public ArrayList<Integer> getNeighbours(final int vertex) throws GraphException{
+    public ArrayList<Integer> getNeighbours(final int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -132,82 +150,16 @@ public class UndirectedGraph {
         return vertices;
     }
 
-    private static void runTests() {
-        /*UndirectedGraph myUndirectedGraph = new UndirectedGraph();
-
-        myUndirectedGraph.addVertex(0);
-        myUndirectedGraph.addVertex(1);
-        myUndirectedGraph.addVertex(2);
-        myUndirectedGraph.addVertex(3);
-        myUndirectedGraph.addEdge(0, 1);
-        myUndirectedGraph.addEdge(1, 2);
-        myUndirectedGraph.addEdge(1, 3);
-
-        assert myUndirectedGraph.getVertices() == 4;
-        assert myUndirectedGraph.getEdges() == 3;
-        assert myUndirectedGraph.isEdge(2, 1);
-        assert myUndirectedGraph.isEdge(1, 2);
-        assert !myUndirectedGraph.isEdge(3, 2);
-        assert myUndirectedGraph.isVertex(1);
-        assert !myUndirectedGraph.isVertex(4);
-        assert myUndirectedGraph.degree(1) == 3;
-
-        assert myUndirectedGraph.degree(2) == 1;
-        myUndirectedGraph.removeEdge(1, 2);
-        assert !myUndirectedGraph.isEdge(1, 2);
-        assert myUndirectedGraph.degree(2) == 0;
-
-        myUndirectedGraph.addEdge(1, 2);
-        myUndirectedGraph.removeVertex(1);
-        assert myUndirectedGraph.getEdges() == 0;
-        assert myUndirectedGraph.getVertices() == 3;
-        assert !myUndirectedGraph.isEdge(1, 2);
-        assert !myUndirectedGraph.isEdge(1, 3);
-        assert !myUndirectedGraph.isEdge(0, 1);
-        assert !myUndirectedGraph.isVertex(1);*/
-    }
-
     public static void main(final String[] args) throws FileNotFoundException {
-        UndirectedGraph.runTests();
-
         long time1 = System.currentTimeMillis();
-
-        Scanner scanner = new Scanner(new File("digraph-ex1.txt"));
-        UndirectedGraph myGraph = new UndirectedGraph();
-
-        int vertices = scanner.nextInt();
-        int edges = scanner.nextInt();
-
-        for (int i = 0; i < vertices; i++) {
-            myGraph.addVertex(i);
-        }
-
-        for (int i = 0; i < edges; i++) {
-            int from = scanner.nextInt();
-            int to = scanner.nextInt();
-            //int cost = scanner.nextInt();
-            myGraph.addEdge(from, to);
-        }
 
         long time2 = System.currentTimeMillis();
         long elapsedTime = time2 - time1;
         System.out.printf("Time to read: %f\n", elapsedTime / 1000.0);
 
-/*        for (ArrayList<Integer> component : cc) {
-            for (Integer vertex : component)
-                System.out.format("%d ", vertex);
-            System.out.printf("\n");
-        }*/
-
         long time3 = System.currentTimeMillis();
         elapsedTime = time3 - time2;
         System.out.printf("Time to find connected components: %f\n", elapsedTime / 1000.0);
-
-        /*for (ArrayList<Integer> component : bc) {
-            for (Integer vertex : component)
-                System.out.format("%d ", vertex);
-            System.out.printf("\n");
-        }*/
 
         long time4 = System.currentTimeMillis();
         elapsedTime = time4 - time3;

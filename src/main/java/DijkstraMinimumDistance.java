@@ -22,9 +22,9 @@ public class DijkstraMinimumDistance {
         }
     }
 
-    private DirectedWeightedGraph<Integer> graph;
+    private DirectedWeightedGraph graph;
 
-    public DijkstraMinimumDistance(DirectedWeightedGraph<Integer> graph) {
+    public DijkstraMinimumDistance(DirectedWeightedGraph graph) {
         this.graph = graph;
     }
 
@@ -82,7 +82,7 @@ public class DijkstraMinimumDistance {
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("dijgraph.txt"));
-        DirectedWeightedGraph<Integer> myGraph = new DirectedWeightedGraph<>();
+        DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
 
         int vertices = scanner.nextInt();
         int edges = scanner.nextInt();

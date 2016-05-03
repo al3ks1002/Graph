@@ -1,1 +1,1 @@
-# A series of graph algorithms.
+# A series of graph algorithms
