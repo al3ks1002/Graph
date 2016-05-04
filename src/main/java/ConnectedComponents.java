@@ -21,7 +21,7 @@ public class ConnectedComponents {
         }
     }
 
-    private void DFS(final int vertex, UndirectedGraph component) {
+    private void DFS(int vertex, UndirectedGraph component) {
         visited.put(vertex, true);
 
         try {

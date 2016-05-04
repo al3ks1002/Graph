@@ -8,7 +8,7 @@ import java.util.Stack;
 public class UndirectedGraph {
     private int vertices;
     private int edges;
-    private final HashMap<Integer, ArrayList<Integer>> neighbours;
+    private HashMap<Integer, ArrayList<Integer>> neighbours;
 
     public UndirectedGraph() {
         vertices = 0;
@@ -16,7 +16,7 @@ public class UndirectedGraph {
         neighbours = new HashMap<>();
     }
 
-    public UndirectedGraph(final UndirectedGraph that) {
+    public UndirectedGraph(UndirectedGraph that) {
         vertices = that.vertices;
         edges = that.edges;
         neighbours = that.neighbours;
@@ -50,7 +50,7 @@ public class UndirectedGraph {
         return edges;
     }
 
-    public void addVertex(final int vertex) {
+    public void addVertex(int vertex) {
         if (isVertex(vertex)) {
             return;
         }
@@ -59,7 +59,7 @@ public class UndirectedGraph {
         vertices++;
     }
 
-    public void addEdge(final int from, final int to) {
+    public void addEdge(int from, int to) {
         if (!isVertex(from)) {
             addVertex(from);
         }
@@ -75,7 +75,7 @@ public class UndirectedGraph {
         }
     }
 
-    public int degree(final int vertex) throws GraphException {
+    public int degree(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -83,7 +83,7 @@ public class UndirectedGraph {
         return neighbours.get(vertex).size();
     }
 
-    public void removeVertex(final int vertex) {
+    public void removeVertex(int vertex) {
         if (!isVertex(vertex)) {
             return;
         }
@@ -99,7 +99,7 @@ public class UndirectedGraph {
         neighbours.remove(vertex);
     }
 
-    public void removeEdge(final int from, final int to) {
+    public void removeEdge(int from, int to) {
         if (!isEdge(from, to)) {
             return;
         }
@@ -121,11 +121,11 @@ public class UndirectedGraph {
         }
     }
 
-    public boolean isVertex(final int vertex) {
+    public boolean isVertex(int vertex) {
         return neighbours.containsKey(vertex);
     }
 
-    public boolean isEdge(final int to, final int from) {
+    public boolean isEdge(int to, int from) {
         if (!isVertex(to)) {
             return false;
         }
@@ -139,7 +139,7 @@ public class UndirectedGraph {
         return false;
     }
 
-    public ArrayList<Integer> getNeighbours(final int vertex) throws GraphException {
+    public ArrayList<Integer> getNeighbours(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -152,7 +152,7 @@ public class UndirectedGraph {
         return vertices;
     }
 
-    public static void main(final String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         long time1 = System.currentTimeMillis();
 
         long time2 = System.currentTimeMillis();

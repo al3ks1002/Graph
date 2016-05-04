@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -15,22 +14,22 @@ public class DirectedGraph {
         out = new HashMap<>();
     }
 
-    public DirectedGraph(final DirectedGraph that) {
+    public DirectedGraph(DirectedGraph that) {
         vertices = that.vertices;
         edges = that.edges;
         in = that.in;
         out = that.out;
     }
 
-    public final int getVertices() {
+    public int getVertices() {
         return vertices;
     }
 
-    public final int getEdges() {
+    public int getEdges() {
         return edges;
     }
 
-    public void addVertex(final int vertex) {
+    public void addVertex(int vertex) {
         if (isVertex(vertex)) {
             return;
         }
@@ -40,7 +39,7 @@ public class DirectedGraph {
         vertices++;
     }
 
-    public void addEdge(final int from, final int to) {
+    public void addEdge(int from, int to) {
         if (!isVertex(from)) {
             addVertex(from);
         }
@@ -56,7 +55,7 @@ public class DirectedGraph {
         }
     }
 
-    public int inDegree(final int vertex) throws GraphException {
+    public int inDegree(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -64,7 +63,7 @@ public class DirectedGraph {
         return in.get(vertex).size();
     }
 
-    public int outDegree(final int vertex) throws GraphException {
+    public int outDegree(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -72,7 +71,7 @@ public class DirectedGraph {
         return out.get(vertex).size();
     }
 
-    public void removeVertex(final int vertex) {
+    public void removeVertex(int vertex) {
         if (!isVertex(vertex)) {
             return;
         }
@@ -95,7 +94,7 @@ public class DirectedGraph {
         out.remove(vertex);
     }
 
-    public void removeEdge(final int from, final int to) {
+    public void removeEdge(int from, int to) {
         if (!isEdge(from, to)) {
             return;
         }
@@ -117,11 +116,11 @@ public class DirectedGraph {
         }
     }
 
-    public boolean isVertex(final int vertex) {
+    public boolean isVertex(int vertex) {
         return in.containsKey(vertex);
     }
 
-    public boolean isEdge(final int to, final int from) {
+    public boolean isEdge(int to, int from) {
         if (!isVertex(to)) {
             return false;
         }
@@ -135,7 +134,7 @@ public class DirectedGraph {
         return false;
     }
 
-    public ArrayList<Integer> iterableIn(final int vertex) throws GraphException {
+    public ArrayList<Integer> iterableIn(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }
@@ -143,7 +142,7 @@ public class DirectedGraph {
         return in.get(vertex);
     }
 
-    public ArrayList<Integer> iterableOut(final int vertex) throws GraphException {
+    public ArrayList<Integer> iterableOut(int vertex) throws GraphException {
         if (!isVertex(vertex)) {
             throw new GraphException();
         }

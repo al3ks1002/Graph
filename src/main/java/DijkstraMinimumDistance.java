@@ -29,6 +29,9 @@ public class DijkstraMinimumDistance {
     }
 
     public MinimumPath findMinimumDistance(int source, int destination) {
+        if (!graph.isVertex(source))
+            return new MinimumPath();
+
         HashMap<Integer, Integer> distance = new HashMap<>();
         PriorityQueue<Pair> queue = new PriorityQueue<>();
         HashMap<Integer, Boolean> visited = new HashMap<>();
@@ -72,6 +75,7 @@ public class DijkstraMinimumDistance {
                     }
                 }
             } catch (GraphException e) {
+                // never getting here
                 e.printStackTrace();
             }
 
@@ -81,18 +85,7 @@ public class DijkstraMinimumDistance {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("dijgraph.txt"));
-        DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
-
-        int vertices = scanner.nextInt();
-        int edges = scanner.nextInt();
-        for (int i = 0; i < edges; i++) {
-            int from = scanner.nextInt();
-            int to = scanner.nextInt();
-            int cost = scanner.nextInt();
-            myGraph.addEdge(from, to, cost);
-        }
-
+        DirectedWeightedGraph myGraph = new DirectedWeightedGraph("src/input/dijgraph.txt");
         DijkstraMinimumDistance dijkstra = new DijkstraMinimumDistance(myGraph);
 
         Scanner in = new Scanner(System.in);

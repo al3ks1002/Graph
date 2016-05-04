@@ -1,1 +1,3 @@
-public class GraphException extends Exception {}
+public class GraphException extends Exception {
+
+}

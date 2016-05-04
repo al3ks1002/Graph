@@ -5,14 +5,14 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class DirectedWeightedGraph extends DirectedGraph {
-    private final TreeMap<Edge, Integer> costs;
+    private TreeMap<Edge, Integer> costs;
 
     public DirectedWeightedGraph() {
         super();
         costs = new TreeMap<>();
     }
 
-    public DirectedWeightedGraph(final DirectedWeightedGraph that) {
+    public DirectedWeightedGraph(DirectedWeightedGraph that) {
         super();
         costs = that.costs;
     }
@@ -38,10 +38,10 @@ public class DirectedWeightedGraph extends DirectedGraph {
         }
     }
 
-    public void addEdge(final int from, final int to) {
+    public void addEdge(int from, int to) {
     }
 
-    public void addEdge(final int from, final int to, final int cost) {
+    public void addEdge(int from, int to, int cost) {
         if (!isVertex(from)) {
             addVertex(from);
         }
@@ -58,12 +58,12 @@ public class DirectedWeightedGraph extends DirectedGraph {
         }
     }
 
-    public void removeEdge(final int from, final int to) {
+    public void removeEdge(int from, int to) {
         super.removeEdge(from, to);
         costs.remove(new Edge(from, to));
     }
 
-    public Integer getCost(final int from, final int to) throws GraphException {
+    public Integer getCost(int from, int to) throws GraphException {
         if (!isEdge(from, to)) {
             throw new GraphException();
         }
@@ -71,7 +71,7 @@ public class DirectedWeightedGraph extends DirectedGraph {
         return costs.get(new Edge(from, to));
     }
 
-    public void setCost(final int from, final int to, final int cost) throws GraphException {
+    public void setCost(int from, int to, int cost) throws GraphException {
         if (!isEdge(from, to)) {
             throw new GraphException();
         }
@@ -79,7 +79,7 @@ public class DirectedWeightedGraph extends DirectedGraph {
         costs.put(new Edge(from, to), cost);
     }
 
-    public static void main(final String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         DirectedWeightedGraph myGraph = new DirectedWeightedGraph();
 
         Scanner in = new Scanner(System.in);

@@ -24,7 +24,7 @@ public class BiconnectedComponents {
         }
     }
 
-    private void DFS(final int vertex, final int father, final Stack<Integer> stack) {
+    private void DFS(int vertex, int father, Stack<Integer> stack) {
         count.put(vertex, count.get(father) + 1);
         lowLink.put(vertex, count.get(father) + 1);
 
@@ -64,6 +64,7 @@ public class BiconnectedComponents {
                 }
             }
         } catch (GraphException e) {
+            // never getting here
             e.printStackTrace();
         }
     }
