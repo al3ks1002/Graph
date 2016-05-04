@@ -23,6 +23,8 @@ public class UndirectedGraph {
     }
 
     public UndirectedGraph(String file) throws FileNotFoundException {
+        vertices = 0;
+        edges = 0;
         neighbours = new HashMap<>();
 
         Scanner scanner = new Scanner(new File(file));

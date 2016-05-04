@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -14,6 +15,27 @@ public class DirectedWeightedGraph extends DirectedGraph {
     public DirectedWeightedGraph(final DirectedWeightedGraph that) {
         super();
         costs = that.costs;
+    }
+
+    public DirectedWeightedGraph(String file) throws FileNotFoundException{
+        in = new HashMap<>();
+        out = new HashMap<>();
+        costs = new TreeMap<>();
+
+        Scanner scanner = new Scanner(new File(file));
+        int n = scanner.nextInt();
+
+        for (int i = 1; i <= n; i++)
+            addVertex(i);
+
+        int m = scanner.nextInt();
+
+        for (int i = 0; i < m; i++) {
+            int from = scanner.nextInt();
+            int to = scanner.nextInt();
+            int cost = scanner.nextInt();
+            addEdge(from, to, cost);
+        }
     }
 
     public void addEdge(final int from, final int to) {

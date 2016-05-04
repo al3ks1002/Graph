@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class DirectedGraph {
     private int vertices;
     protected int edges;
-    protected final HashMap<Integer, ArrayList<Integer>> out;
-    protected final HashMap<Integer, ArrayList<Integer>> in;
+    protected HashMap<Integer, ArrayList<Integer>> out;
+    protected HashMap<Integer, ArrayList<Integer>> in;
 
     public DirectedGraph() {
         vertices = 0;
