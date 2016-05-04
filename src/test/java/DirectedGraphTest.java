@@ -3,11 +3,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class DirectedGraphTest {
-    private DirectedGraph graph;
-
     @Test
-    public void testDirectedGraph() {
-        graph = new DirectedGraph();
+    public void testDirectedGraph() throws GraphException {
+        DirectedGraph graph = new DirectedGraph();
 
         graph.addVertex(0);
         graph.addVertex(1);
@@ -24,21 +22,13 @@ public class DirectedGraphTest {
         assertTrue(graph.isVertex(1));
         assertFalse(graph.isVertex(4));
 
-        try {
-            assertEquals(graph.outDegree(1), 2);
-        } catch (GraphException e) {
-        }
-        try {
-            assertEquals(graph.inDegree(2), 1);
-        } catch (GraphException e) {
-        }
+        assertEquals(graph.outDegree(1), 2);
+        assertEquals(graph.inDegree(2), 1);
 
         graph.removeEdge(1, 2);
 
         assertFalse(graph.isEdge(1, 2));
-        try {
-            assertEquals(graph.inDegree(2), 0);
-        } catch (GraphException e) {}
+        assertEquals(graph.inDegree(2), 0);
 
         graph.addEdge(1, 2);
         graph.removeVertex(1);

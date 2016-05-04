@@ -3,11 +3,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class UndirectedGraphTest {
-    private UndirectedGraph graph;
-
     @Test
     public void testUndirectedGraph() {
-        graph = new UndirectedGraph();
+        UndirectedGraph graph = new UndirectedGraph();
 
         graph.addVertex(0);
         graph.addVertex(1);
@@ -27,10 +25,12 @@ public class UndirectedGraphTest {
         try {
             assertEquals(graph.degree(1), 3);
         } catch (GraphException e) {
+            // we're gonna catch it
         }
         try {
             assertEquals(graph.degree(2), 1);
         } catch (GraphException e) {
+            // we're gonna catch it
         }
 
         graph.removeEdge(1, 2);
@@ -38,6 +38,7 @@ public class UndirectedGraphTest {
         try {
             assertEquals(graph.degree(2), 0);
         } catch (GraphException e) {
+            // we're gonna catch it
         }
 
         graph.addEdge(1, 2);
