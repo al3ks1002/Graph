@@ -149,4 +149,10 @@ public class DirectedGraph {
 
         return out.get(vertex);
     }
+
+    public ArrayList<Integer> getAllVertices() {
+        ArrayList<Integer> vertices = new ArrayList<>();
+        vertices.addAll(in.keySet());
+        return vertices;
+    }
 }

@@ -10,7 +10,7 @@ public class BiconnectedComponentsTest {
     private BiconnectedComponents bcc;
 
     @Test
-    public void testBiconnectedComponentsBig() {
+    public void testBiconnectedComponentsBig() throws GraphException {
         try {
             graph = new UndirectedGraph("src/input/bigBCC.txt");
         } catch (FileNotFoundException e) {
