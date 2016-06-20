@@ -1,15 +1,17 @@
+package net.alexc.graph;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
 public class BiconnectedComponents {
     private int currentIndex;
-    private UndirectedGraph graph;
-    private HashMap<Integer, Integer> lowLink;
-    private HashMap<Integer, Integer> index;
-    private ArrayList<ArrayList<Integer>> biconnectedComponents;
+    private final UndirectedGraph graph;
+    private final HashMap<Integer, Integer> lowLink;
+    private final HashMap<Integer, Integer> index;
+    private final ArrayList<ArrayList<Integer>> biconnectedComponents;
 
-    public BiconnectedComponents(UndirectedGraph graph) throws GraphException{
+    public BiconnectedComponents(UndirectedGraph graph) throws GraphException {
         this.graph = graph;
         currentIndex = 0;
         lowLink = new HashMap<>();

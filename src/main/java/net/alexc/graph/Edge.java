@@ -1,6 +1,8 @@
+package net.alexc.graph;
+
 public class Edge implements Comparable<Edge> {
-    private int from;
-    private int to;
+    private final int from;
+    private final int to;
 
     public Edge(int from, int to) {
         this.from = from;

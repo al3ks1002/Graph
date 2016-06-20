@@ -1,10 +1,12 @@
+package net.alexc.graph;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConnectedComponents {
-    private UndirectedGraph graph;
-    private HashMap<Integer, Boolean> visited;
-    private ArrayList<UndirectedGraph> connectedComponents;
+    private final UndirectedGraph graph;
+    private final HashMap<Integer, Boolean> visited;
+    private final ArrayList<UndirectedGraph> connectedComponents;
 
     public ConnectedComponents(UndirectedGraph graph) {
         this.graph = graph;

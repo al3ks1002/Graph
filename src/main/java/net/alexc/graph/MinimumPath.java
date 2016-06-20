@@ -1,8 +1,10 @@
+package net.alexc.graph;
+
 import java.util.ArrayList;
 
 public class MinimumPath {
-    private int minimumDistance;
-    ArrayList<Integer> path;
+    private final int minimumDistance;
+    private final ArrayList<Integer> path;
 
     public MinimumPath() {
         minimumDistance = 0;

@@ -2,6 +2,7 @@
   <dictionary name="alex">
     <words>
       <w>biconnected</w>
+      <w>dijgraph</w>
     </words>
   </dictionary>
 </component>

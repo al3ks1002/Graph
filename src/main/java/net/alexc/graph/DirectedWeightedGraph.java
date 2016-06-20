@@ -1,3 +1,5 @@
+package net.alexc.graph;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -5,7 +7,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class DirectedWeightedGraph extends DirectedGraph {
-    private TreeMap<Edge, Integer> costs;
+    private final TreeMap<Edge, Integer> costs;
 
     public DirectedWeightedGraph() {
         super();
@@ -17,7 +19,7 @@ public class DirectedWeightedGraph extends DirectedGraph {
         costs = that.costs;
     }
 
-    public DirectedWeightedGraph(String file) throws FileNotFoundException{
+    public DirectedWeightedGraph(String file) throws FileNotFoundException {
         in = new HashMap<>();
         out = new HashMap<>();
         costs = new TreeMap<>();

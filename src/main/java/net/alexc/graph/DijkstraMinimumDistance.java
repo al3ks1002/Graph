@@ -1,11 +1,12 @@
-import java.io.File;
+package net.alexc.graph;
+
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DijkstraMinimumDistance {
     private class Pair implements Comparable<Pair> {
-        private int vertex;
-        private int distance;
+        private final int vertex;
+        private final int distance;
 
         Pair(int vertex, int distance) {
             this.vertex = vertex;
@@ -22,7 +23,7 @@ public class DijkstraMinimumDistance {
         }
     }
 
-    private DirectedWeightedGraph graph;
+    private final DirectedWeightedGraph graph;
 
     public DijkstraMinimumDistance(DirectedWeightedGraph graph) {
         this.graph = graph;
@@ -94,6 +95,10 @@ public class DijkstraMinimumDistance {
 
             System.out.printf("Enter x: ");
             int x = in.nextInt();
+
+            if (x == -1) {
+                break;
+            }
 
             System.out.printf("Enter y: ");
             int y = in.nextInt();

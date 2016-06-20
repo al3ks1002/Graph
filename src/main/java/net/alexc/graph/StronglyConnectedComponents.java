@@ -1,14 +1,17 @@
+package net.alexc.graph;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Stack;
 
 public class StronglyConnectedComponents {
     private int currentIndex;
-    private DirectedGraph graph;
-    private HashMap<Integer, Integer> lowLink;
-    private HashMap<Integer, Integer> index;
-    private HashMap<Integer, Boolean> inStack;
-    private ArrayList<ArrayList<Integer>> stronglyConnectedComponents;
+    private final DirectedGraph graph;
+    private final HashMap<Integer, Integer> lowLink;
+    private final HashMap<Integer, Integer> index;
+    private final HashMap<Integer, Boolean> inStack;
+    private final ArrayList<ArrayList<Integer>> stronglyConnectedComponents;
 
     public StronglyConnectedComponents(DirectedGraph graph) throws GraphException {
         this.graph = graph;
@@ -50,14 +53,14 @@ public class StronglyConnectedComponents {
                 if (lowLink.get(son) < lowLink.get(vertex)) {
                     lowLink.put(vertex, lowLink.get(son));
                 }
-            } else if (inStack.containsKey(son) && inStack.get(son) == true) {
+            } else if (inStack.containsKey(son) && inStack.get(son)) {
                 if (index.get(son) < lowLink.get(vertex)) {
                     lowLink.put(vertex, index.get(son));
                 }
             }
         }
 
-        if (lowLink.get(vertex) == index.get(vertex)) {
+        if (Objects.equals(lowLink.get(vertex), index.get(vertex))) {
             ArrayList<Integer> newComponent = new ArrayList<>();
 
             while (!stack.peek().equals(vertex)) {

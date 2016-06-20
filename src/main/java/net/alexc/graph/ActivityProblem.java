@@ -1,16 +1,25 @@
+package net.alexc.graph;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class ActivityProblem {
-    private DirectedGraph graph;
-    private ArrayList<Integer> topologicalSorting;
-    private HashMap<Integer, Integer> time;
-    private HashMap<Integer, Integer> earliestStart, earliestEnd;
-    private HashMap<Integer, Integer> latestStart, latestEnd;
+    private final DirectedGraph graph;
+    private final ArrayList<Integer> topologicalSorting;
+    private final HashMap<Integer, Integer> time;
+    private final HashMap<Integer, Integer> earliestStart;
+    private final HashMap<Integer, Integer> earliestEnd;
+    private final HashMap<Integer, Integer> latestStart;
+    private final HashMap<Integer, Integer> latestEnd;
+    private final int source;
+    private final int sink;
+    private int vertices;
     private boolean isDAG;
 
     public ActivityProblem(String file) throws FileNotFoundException, GraphException {
+        source = Integer.MIN_VALUE;
+        sink = Integer.MAX_VALUE;
         topologicalSorting = new ArrayList<>();
         earliestStart = new HashMap<>();
         earliestEnd = new HashMap<>();
@@ -18,12 +27,12 @@ public class ActivityProblem {
         latestEnd = new HashMap<>();
         time = new HashMap<>();
         isDAG = true;
-        this.graph = new DirectedGraph();
+        graph = new DirectedGraph();
 
         Scanner scanner = new Scanner(new File(file));
-        int n = scanner.nextInt();
+        vertices = scanner.nextInt();
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= vertices; i++) {
             int activity = scanner.nextInt();
             graph.addVertex(activity);
 
@@ -32,12 +41,11 @@ public class ActivityProblem {
 
             int predecessors = scanner.nextInt();
             for (int j = 1; j <= predecessors; j++) {
-                int pred = scanner.nextInt();
-                graph.addEdge(pred, activity);
+                int predecessor = scanner.nextInt();
+                graph.addEdge(predecessor, activity);
             }
         }
 
-        int source = Integer.MIN_VALUE;
         graph.addVertex(source);
         time.put(source, 0);
         for (Integer activity : graph.getAllVertices()) {
@@ -46,7 +54,6 @@ public class ActivityProblem {
             }
         }
 
-        int sink = Integer.MAX_VALUE;
         graph.addVertex(sink);
         time.put(sink, 0);
         for (Integer activity : graph.getAllVertices()) {
@@ -54,12 +61,15 @@ public class ActivityProblem {
                 graph.addEdge(activity, sink);
             }
         }
+    }
 
+    public void solve() throws GraphException {
         StronglyConnectedComponents scc = new StronglyConnectedComponents(graph);
         ArrayList<ArrayList<Integer>> components = scc.getStronglyConnectedComponents();
 
-        if (components.size() < n) {
+        if (components.size() < vertices) {
             isDAG = false;
+            System.out.println("The graph is not a DAG!");
             return;
         }
 
@@ -75,8 +85,8 @@ public class ActivityProblem {
         for (int i = 1; i < topologicalSorting.size(); i++) {
             int current = topologicalSorting.get(i);
             int best = 0;
-            for (Integer pred : graph.iterableIn(current)) {
-                best = Math.max(best, earliestEnd.get(pred));
+            for (Integer predecessor : graph.iterableIn(current)) {
+                best = Math.max(best, earliestEnd.get(predecessor));
             }
             earliestStart.put(current, best);
             earliestEnd.put(current, best + time.get(current));
@@ -109,6 +119,7 @@ public class ActivityProblem {
     }
 
     public static void main(String[] args) throws FileNotFoundException, GraphException {
-        ActivityProblem mlc = new ActivityProblem("src/input/activity.txt");
+        ActivityProblem myActivityProblem = new ActivityProblem("src/input/activity.txt");
+        myActivityProblem.solve();
     }
 }

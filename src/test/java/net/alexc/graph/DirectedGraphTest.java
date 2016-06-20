@@ -1,3 +1,5 @@
+package net.alexc.graph;
+
 import org.junit.*;
 
 import static org.junit.Assert.*;

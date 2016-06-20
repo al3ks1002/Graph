@@ -1,3 +1,5 @@
+package net.alexc.graph;
+
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

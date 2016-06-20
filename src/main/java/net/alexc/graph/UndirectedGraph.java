@@ -1,14 +1,15 @@
+package net.alexc.graph;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class UndirectedGraph {
     private int vertices;
     private int edges;
-    private HashMap<Integer, ArrayList<Integer>> neighbours;
+    private final HashMap<Integer, ArrayList<Integer>> neighbours;
 
     public UndirectedGraph() {
         vertices = 0;

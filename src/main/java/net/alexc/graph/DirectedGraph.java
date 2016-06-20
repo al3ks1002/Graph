@@ -1,3 +1,5 @@
+package net.alexc.graph;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 
